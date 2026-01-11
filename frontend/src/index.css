@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #0f172a;
+    --color-primary-light: #334155;
+    --color-secondary: #3b82f6;
+    --color-risk-high: #ef4444;
+    --color-risk-medium: #f59e0b;
+    --color-risk-low: #10b981;
+}
+
+/* Base styles using correct v4 syntax or standard CSS */
+body {
+    @apply bg-gray-50 text-gray-900;
+    /* Note: slate-50 might require importing the color or using gray-50 if slate isn't default in v4 without config */
+}
+
+/* Re-add slate colors if missing, but usually v4 includes full palette but we should be safe with gray/slate if imported */

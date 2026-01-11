@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# ContractIQ Specific
+backend/*.db
+backend/temp_*
+backend/data/
+
+# Logs
+*.log
