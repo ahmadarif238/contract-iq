@@ -58,21 +58,34 @@ class QAService:
 
         # 3. Call LLM
         try:
-            response = self.llm.invoke([HumanMessage(content=prompt_text)])
+            response = await self.llm.ainvoke([HumanMessage(content=prompt_text)])
             content = response.content.strip()
             
-            # Clean up markdown if present
-            if "```json" in content:
-                content = content.split("```json")[1].split("```")[0]
-            elif "```" in content:
-                content = content.split("```")[1].split("```")[0]
-                
-            return json.loads(content)
+            # Robust JSON extraction
+            import re
             
+            # Try to find JSON block
+            json_match = re.search(r"\{.*\}", content, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(0)
+            else:
+                json_str = content
+            
+            try:
+                return json.loads(json_str)
+            except json.JSONDecodeError:
+                # Fallback if invalid JSON
+                print(f"Failed to parse JSON. Content: {content}")
+                return {
+                    "answer": content[:500] + "...", # Return raw text if JSON fails
+                    "citations": [],
+                    "confidence": "low"
+                }
+
         except Exception as e:
             print(f"Error in QAService: {e}")
             return {
-                "answer": "An error occurred while analyzing the contract.",
+                "answer": f"I encountered an error analyzing the contracts. ({str(e)})",
                 "citations": [],
                 "confidence": "zero"
             }
