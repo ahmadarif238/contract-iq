@@ -18,3 +18,4 @@ httpx
 sentence-transformers
 pinecone-client
 langchain-pinecone
+langchain-huggingface
