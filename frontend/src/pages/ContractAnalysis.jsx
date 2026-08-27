@@ -135,13 +135,13 @@ const ContractAnalysis = () => {
             {/* Header */}
             <div className="flex justify-between items-start">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900">{contract.filename}</h1>
-                    <p className="text-gray-500">Uploaded: {new Date(contract.upload_date).toLocaleDateString()}</p>
+                    <h1 className="text-3xl text-ink">{contract.filename}</h1>
+                    <p className="text-ink-soft">Uploaded: {new Date(contract.upload_date).toLocaleDateString()}</p>
                 </div>
                 <div className="flex space-x-3">
                     <button
                         onClick={handleExport}
-                        className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center"
+                        className="bg-white border border-line-strong text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 flex items-center"
                         title="Export Report"
                     >
                         <Download className="w-4 h-4 mr-2" />
@@ -149,14 +149,14 @@ const ContractAnalysis = () => {
                     </button>
                     <span className={cn(
                         "px-4 py-2 rounded-lg text-sm font-medium uppercase",
-                        contract.status === 'analyzed' ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"
+                        contract.status === 'analyzed' ? "bg-green-100 text-green-700" : "bg-accent-soft text-accent-hover"
                     )}>
                         {contract.status}
                     </span>
                     <button
                         onClick={triggerAnalysis}
                         disabled={analyzing}
-                        className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                        className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-accent-hover disabled:opacity-50"
                     >
                         {analyzing ? "Analyzing..." : (contract.status === 'analyzed' ? "Re-run Analysis" : "Run Analysis")}
                     </button>
@@ -171,40 +171,40 @@ const ContractAnalysis = () => {
 
                     {/* Lifecycle Grid */}
                     {contract.status === 'analyzed' && (
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
-                            <div className="flex flex-col p-4 bg-gray-50/50 rounded-xl border border-gray-100/50 hover:bg-gray-50 transition-colors cursor-default">
-                                <span className="text-xs uppercase tracking-wider font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-line grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
+                            <div className="flex flex-col p-4 bg-paper/50 rounded-xl border border-line/50 hover:bg-neutral-50 transition-colors cursor-default">
+                                <span className="text-xs uppercase tracking-wider font-semibold text-ink-soft mb-2 flex items-center gap-1.5">
                                     <Calendar className="w-3.5 h-3.5" /> Effective Date
                                 </span>
-                                <span className="text-lg font-bold text-gray-900">
-                                    {contract.start_date ? new Date(contract.start_date).toLocaleDateString(undefined, { dateStyle: 'medium' }) : <span className="text-gray-400 font-normal">N/A</span>}
+                                <span className="text-lg font-bold text-ink">
+                                    {contract.start_date ? new Date(contract.start_date).toLocaleDateString(undefined, { dateStyle: 'medium' }) : <span className="text-ink-faint font-normal">N/A</span>}
                                 </span>
                             </div>
 
-                            <div className="flex flex-col p-4 bg-gray-50/50 rounded-xl border border-gray-100/50 hover:bg-gray-50 transition-colors cursor-default">
-                                <span className="text-xs uppercase tracking-wider font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                            <div className="flex flex-col p-4 bg-paper/50 rounded-xl border border-line/50 hover:bg-neutral-50 transition-colors cursor-default">
+                                <span className="text-xs uppercase tracking-wider font-semibold text-ink-soft mb-2 flex items-center gap-1.5">
                                     <Clock className="w-3.5 h-3.5" /> Expiration
                                 </span>
-                                <span className={cn("text-lg font-bold", contract.end_date ? "text-gray-900" : "text-gray-400 font-normal")}>
+                                <span className={cn("text-lg font-bold", contract.end_date ? "text-ink" : "text-ink-faint font-normal")}>
                                     {contract.end_date ? new Date(contract.end_date).toLocaleDateString(undefined, { dateStyle: 'medium' }) : "Perpetual"}
                                 </span>
                             </div>
 
-                            <div className="flex flex-col p-4 bg-gray-50/50 rounded-xl border border-gray-100/50 hover:bg-gray-50 transition-colors cursor-default">
-                                <span className="text-xs uppercase tracking-wider font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                            <div className="flex flex-col p-4 bg-paper/50 rounded-xl border border-line/50 hover:bg-neutral-50 transition-colors cursor-default">
+                                <span className="text-xs uppercase tracking-wider font-semibold text-ink-soft mb-2 flex items-center gap-1.5">
                                     <RotateCw className="w-3.5 h-3.5" /> Renewal
                                 </span>
-                                <span className="text-sm font-medium text-gray-900 leading-snug line-clamp-2" title={contract.renewal_terms}>
-                                    {contract.renewal_terms || <span className="text-gray-400 font-normal">Not specified</span>}
+                                <span className="text-sm font-medium text-ink leading-snug line-clamp-2" title={contract.renewal_terms}>
+                                    {contract.renewal_terms || <span className="text-ink-faint font-normal">Not specified</span>}
                                 </span>
                             </div>
 
-                            <div className="flex flex-col p-4 bg-gray-50/50 rounded-xl border border-gray-100/50 hover:bg-gray-50 transition-colors cursor-default">
-                                <span className="text-xs uppercase tracking-wider font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                            <div className="flex flex-col p-4 bg-paper/50 rounded-xl border border-line/50 hover:bg-neutral-50 transition-colors cursor-default">
+                                <span className="text-xs uppercase tracking-wider font-semibold text-ink-soft mb-2 flex items-center gap-1.5">
                                     <AlertTriangle className="w-3.5 h-3.5" /> Notice Period
                                 </span>
-                                <span className="text-lg font-bold text-gray-900">
-                                    {contract.notice_period_days ? `${contract.notice_period_days} Days` : <span className="text-gray-400 font-normal">None</span>}
+                                <span className="text-lg font-bold text-ink">
+                                    {contract.notice_period_days ? `${contract.notice_period_days} Days` : <span className="text-ink-faint font-normal">None</span>}
                                 </span>
                             </div>
                         </div>
@@ -220,10 +220,10 @@ const ContractAnalysis = () => {
                                 {contract.alerts.map((alert, idx) => (
                                     <div key={idx} className="bg-white p-4 rounded-xl border border-amber-200 flex flex-col shadow-sm">
                                         <div className="flex justify-between items-start mb-1">
-                                            <span className="text-sm font-semibold text-gray-900">{alert.alert_type}</span>
+                                            <span className="text-sm font-semibold text-ink">{alert.alert_type}</span>
                                             <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold uppercase">{alert.status}</span>
                                         </div>
-                                        <span className="text-xs text-gray-500">Due: {new Date(alert.due_date).toLocaleDateString(undefined, { dateStyle: 'full' })}</span>
+                                        <span className="text-xs text-ink-soft">Due: {new Date(alert.due_date).toLocaleDateString(undefined, { dateStyle: 'full' })}</span>
                                     </div>
                                 ))}
                             </div>
@@ -232,22 +232,22 @@ const ContractAnalysis = () => {
 
                     {/* Summary */}
                     {summary && (
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                            <h2 className="text-xl font-bold mb-6 flex items-center text-gray-900">
-                                <div className="bg-blue-100 p-2 rounded-lg mr-3">
-                                    <Activity className="w-5 h-5 text-blue-600" />
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-line">
+                            <h2 className="text-xl mb-6 flex items-center text-ink">
+                                <div className="bg-accent-soft p-2 rounded-lg mr-3">
+                                    <Activity className="w-5 h-5 text-accent" />
                                 </div>
                                 Executive Summary
                             </h2>
-                            <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed whitespace-pre-line">
+                            <div className="prose prose-sm max-w-none text-ink-soft leading-relaxed whitespace-pre-line">
                                 {summary}
                             </div>
                         </div>
                     )}
 
                     {/* Playbook Compliance Widget (Production Feature) */}
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <h2 className="text-xl font-bold mb-6 flex items-center text-gray-900">
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-line">
+                        <h2 className="text-xl mb-6 flex items-center text-ink">
                             <div className="bg-emerald-100 p-2 rounded-lg mr-3">
                                 <ShieldCheck className="w-5 h-5 text-emerald-600" />
                             </div>
@@ -278,24 +278,24 @@ const ContractAnalysis = () => {
                     </div>
 
                     {/* Extracted Clauses (Collapsible or just better list) */}
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                        <h2 className="text-xl font-bold mb-6 flex items-center text-gray-900">
-                            <div className="bg-slate-100 p-2 rounded-lg mr-3">
-                                <FileText className="w-5 h-5 text-slate-600" />
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-line">
+                        <h2 className="text-xl mb-6 flex items-center text-ink">
+                            <div className="bg-neutral-100 p-2 rounded-lg mr-3">
+                                <FileText className="w-5 h-5 text-ink-soft" />
                             </div>
                             Clause Index
                         </h2>
                         {clauses.length === 0 ? (
-                            <p className="text-gray-500 italic">No clauses parsed.</p>
+                            <p className="text-ink-soft italic">No clauses parsed.</p>
                         ) : (
                             <div className="grid grid-cols-1 gap-4">
                                 {clauses.map((clause, i) => (
-                                    <div key={i} className="p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all duration-200">
+                                    <div key={i} className="p-4 rounded-xl border border-line bg-paper/50 hover:bg-white hover:border-accent/25 hover:shadow-sm transition-all duration-200">
                                         <div className="flex items-center mb-2">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2"></div>
-                                            <h3 className="font-semibold text-sm text-gray-900">{clause.category}</h3>
+                                            <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2"></div>
+                                            <h3 className="font-semibold text-sm text-ink">{clause.category}</h3>
                                         </div>
-                                        <p className="text-xs text-gray-500 italic line-clamp-3">"{clause.text}"</p>
+                                        <p className="text-xs text-ink-soft italic line-clamp-3">"{clause.text}"</p>
                                     </div>
                                 ))}
                             </div>
@@ -311,18 +311,18 @@ const ContractAnalysis = () => {
                         <ChatInterface contractId={id} />
 
                         {/* Risk Cards */}
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 max-h-[600px] overflow-y-auto">
-                            <h2 className="text-lg font-bold mb-4 flex items-center text-gray-900">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-line max-h-[600px] overflow-y-auto">
+                            <h2 className="text-lg mb-4 flex items-center text-ink">
                                 <AlertTriangle className="w-5 h-5 mr-2 text-red-500" /> Risks
                             </h2>
                             {risks.length === 0 ? (
-                                <p className="text-gray-500 text-sm">No risks detected.</p>
+                                <p className="text-ink-soft text-sm">No risks detected.</p>
                             ) : (
                                 <div className="space-y-3">
                                     {risks.map((risk, i) => (
-                                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-200 hover:border-red-200 transition-colors shadow-sm relative group">
+                                        <div key={i} className="bg-white p-4 rounded-xl border border-line hover:border-red-200 transition-colors shadow-sm relative group">
                                             <div className="flex justify-between items-center mb-2">
-                                                <span className="text-sm font-semibold text-gray-800">{risk.clause_category}</span>
+                                                <span className="text-sm font-semibold text-neutral-800">{risk.clause_category}</span>
                                                 <span className={cn(
                                                     "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full",
                                                     risk.risk_level.toLowerCase() === 'high' || risk.risk_level.toLowerCase() === 'critical' ? "bg-red-100 text-red-700" :
@@ -332,11 +332,11 @@ const ContractAnalysis = () => {
                                                     {risk.risk_level}
                                                 </span>
                                             </div>
-                                            <p className="text-xs text-gray-500 mb-2 leading-relaxed">{risk.reasoning}</p>
+                                            <p className="text-xs text-ink-soft mb-2 leading-relaxed">{risk.reasoning}</p>
 
                                             <button
                                                 onClick={() => handleRemediate(risk)}
-                                                className="mt-2 text-xs flex items-center text-blue-600 hover:text-blue-800 font-medium opacity-0 group-hover:opacity-100 transition-opacity"
+                                                className="mt-2 text-xs flex items-center text-accent hover:text-accent-hover font-medium opacity-0 group-hover:opacity-100 transition-opacity"
                                             >
                                                 <PenTool className="w-3 h-3 mr-1" /> Auto-Remediate
                                             </button>
@@ -354,32 +354,32 @@ const ContractAnalysis = () => {
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
                     <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-bold flex items-center text-gray-900">
-                                <PenTool className="w-5 h-5 mr-2 text-blue-600" /> AI Clause Remediation
+                            <h3 className="text-lg font-bold flex items-center text-ink">
+                                <PenTool className="w-5 h-5 mr-2 text-accent" /> AI Clause Remediation
                             </h3>
-                            <button onClick={() => setRewriting(false)} className="text-gray-400 hover:text-gray-600">
+                            <button onClick={() => setRewriting(false)} className="text-ink-faint hover:text-ink-soft">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
 
                         {rewriteLoading ? (
-                            <div className="py-12 text-center text-gray-500 animate-pulse">
+                            <div className="py-12 text-center text-ink-soft animate-pulse">
                                 Writing optimized clause...
                             </div>
                         ) : rewriteResult ? (
                             <div className="space-y-4">
-                                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Proposed Revision</h4>
-                                    <p className="text-sm text-gray-800 leading-relaxed font-medium">{rewriteResult.rewritten_text}</p>
+                                <div className="bg-paper p-4 rounded-lg border border-line">
+                                    <h4 className="text-xs font-bold text-ink-soft uppercase tracking-wide mb-2">Proposed Revision</h4>
+                                    <p className="text-sm text-neutral-800 leading-relaxed font-medium">{rewriteResult.rewritten_text}</p>
                                 </div>
-                                <div className="p-4 rounded-lg bg-blue-50 border border-blue-100">
-                                    <h4 className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">Explanation</h4>
-                                    <p className="text-xs text-blue-800">{rewriteResult.explanation}</p>
+                                <div className="p-4 rounded-lg bg-accent-soft border border-accent/20">
+                                    <h4 className="text-xs font-bold text-accent uppercase tracking-wide mb-1">Explanation</h4>
+                                    <p className="text-xs text-accent-hover">{rewriteResult.explanation}</p>
                                 </div>
                                 <div className="pt-2 flex justify-end">
                                     <button
                                         onClick={() => { navigator.clipboard.writeText(rewriteResult.rewritten_text); alert("Copied!"); }}
-                                        className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition"
+                                        className="bg-neutral-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-neutral-800 transition"
                                     >
                                         Copy to Clipboard
                                     </button>
@@ -394,13 +394,13 @@ const ContractAnalysis = () => {
 };
 
 const ComplianceItem = ({ label, status, detail }) => (
-    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100">
-        <span className="text-sm font-medium text-gray-700">{label}</span>
+    <div className="flex items-center justify-between p-3 bg-paper rounded-lg border border-line">
+        <span className="text-sm font-medium text-neutral-700">{label}</span>
         <div className="flex items-center">
-            <span className="text-xs text-gray-500 mr-2">{detail}</span>
+            <span className="text-xs text-ink-soft mr-2">{detail}</span>
             {status === 'pass' && <CheckCircle className="w-4 h-4 text-green-500" />}
             {status === 'warning' && <AlertTriangle className="w-4 h-4 text-amber-500" />}
-            {status === 'check' && <ShieldCheck className="w-4 h-4 text-blue-400" />}
+            {status === 'check' && <ShieldCheck className="w-4 h-4 text-accent" />}
         </div>
     </div>
 );

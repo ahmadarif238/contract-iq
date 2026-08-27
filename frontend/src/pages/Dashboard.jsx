@@ -56,10 +56,10 @@ const Dashboard = () => {
     return (
         <div className="p-6 max-w-7xl mx-auto">
             <header className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Contract Intelligence Dashboard</h1>
+                <h1 className="font-serif-title text-4xl text-ink">Contract Intelligence Dashboard</h1>
                 <div className="flex justify-between items-center mt-2">
-                    <p className="text-gray-500">Monitor and analyze your legal documents.</p>
-                    <Link to="/compare" className="text-sm font-medium text-purple-600 hover:text-purple-800 flex items-center bg-purple-50 px-3 py-1.5 rounded-lg border border-purple-100 transition-colors">
+                    <p className="text-ink-soft">Monitor and analyze your legal documents.</p>
+                    <Link to="/compare" className="text-sm font-medium text-accent hover:text-accent-hover flex items-center bg-accent-soft px-3 py-1.5 rounded-lg border border-accent/20 transition-colors">
                         <BarChart3 className="w-4 h-4 mr-1.5" /> Benchmarks & Compare
                     </Link>
                 </div>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                         label="Total Contracts"
                         value={stats.total_contracts}
                         icon={FileText}
-                        color="bg-blue-50 text-blue-600"
+                        color="bg-accent-soft text-accent"
                     />
                     <StatCard
                         label="Analyzed"
@@ -95,46 +95,46 @@ const Dashboard = () => {
                 </div>
             )}
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                <div className="p-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <h2 className="text-lg font-semibold text-gray-800">Recent Contracts</h2>
+            <div className="bg-white rounded-xl shadow-sm border border-line overflow-hidden">
+                <div className="p-6 border-b border-line flex flex-col md:flex-row justify-between items-center gap-4">
+                    <h2 className="text-lg font-semibold text-neutral-800">Recent Contracts</h2>
 
                     <div className="flex gap-2 w-full md:w-auto">
                         <div className="relative flex-1 md:w-64">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-faint w-4 h-4" />
                             <input
                                 type="text"
                                 placeholder="Search contracts..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                                className="w-full pl-9 pr-4 py-2 border border-line rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/25 focus:border-accent"
                             />
                         </div>
-                        <Link to="/upload" className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition whitespace-nowrap">
+                        <Link to="/upload" className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-accent-hover transition whitespace-nowrap">
                             Upload New
                         </Link>
                     </div>
                 </div>
 
                 {loading ? (
-                    <div className="p-8 text-center text-gray-500">Loading...</div>
+                    <div className="p-8 text-center text-ink-soft">Loading...</div>
                 ) : (
-                    <div className="divide-y divide-gray-100">
+                    <div className="divide-y divide-line">
                         {filteredContracts.length === 0 ? (
-                            <div className="p-8 text-center text-gray-500">No contracts found matching your search.</div>
+                            <div className="p-8 text-center text-ink-soft">No contracts found matching your search.</div>
                         ) : (
                             filteredContracts.map((contract) => (
-                                <div key={contract.id} className="p-4 hover:bg-gray-50 transition flex items-center justify-between">
+                                <div key={contract.id} className="p-4 hover:bg-neutral-50 transition flex items-center justify-between">
                                     <div className="flex items-center space-x-4">
                                         <div className={`p-2 rounded-lg ${contract.status === 'analyzed' ? 'bg-green-100 text-green-600' :
-                                            contract.status === 'processing' ? 'bg-blue-100 text-blue-600' :
-                                                'bg-gray-100 text-gray-600'
+                                            contract.status === 'processing' ? 'bg-accent-soft text-accent' :
+                                                'bg-neutral-100 text-ink-soft'
                                             }`}>
                                             <FileText size={24} />
                                         </div>
                                         <div>
-                                            <h3 className="font-medium text-gray-900">{contract.filename}</h3>
-                                            <span className="text-sm text-gray-500">{new Date(contract.upload_date).toLocaleDateString()}</span>
+                                            <h3 className="font-medium text-ink">{contract.filename}</h3>
+                                            <span className="text-sm text-ink-soft">{new Date(contract.upload_date).toLocaleDateString()}</span>
                                         </div>
                                     </div>
 
@@ -142,12 +142,12 @@ const Dashboard = () => {
                                         <StatusBadge status={contract.status} />
                                         <button
                                             onClick={(e) => handleDelete(contract.id, e)}
-                                            className="text-gray-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 rounded-full"
+                                            className="text-ink-faint hover:text-red-500 transition-colors p-2 hover:bg-red-50 rounded-full"
                                             title="Delete Contract"
                                         >
                                             <Trash2 size={18} />
                                         </button>
-                                        <Link to={`/contracts/${contract.id}`} className="text-gray-400 hover:text-secondary p-2 hover:bg-blue-50 rounded-full">
+                                        <Link to={`/contracts/${contract.id}`} className="text-ink-faint hover:text-secondary p-2 hover:bg-accent-soft rounded-full">
                                             <ChevronRight size={20} />
                                         </Link>
                                     </div>
@@ -164,8 +164,8 @@ const Dashboard = () => {
 
 const StatusBadge = ({ status }) => {
     const styles = {
-        uploaded: "bg-gray-100 text-gray-700",
-        processing: "bg-blue-100 text-blue-700",
+        uploaded: "bg-neutral-100 text-neutral-700",
+        processing: "bg-accent-soft text-accent-hover",
         analyzed: "bg-green-100 text-green-700",
         failed: "bg-red-100 text-red-700",
     };
@@ -180,10 +180,10 @@ const StatusBadge = ({ status }) => {
 
 
 const StatCard = ({ label, value, icon: Icon, color }) => (
-    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+    <div className="bg-white p-6 rounded-xl border border-line shadow-sm flex items-center justify-between">
         <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">{label}</p>
-            <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+            <p className="text-sm font-medium text-ink-soft mb-1">{label}</p>
+            <h3 className="font-serif-title text-3xl text-ink">{value}</h3>
         </div>
         <div className={`p-3 rounded-lg ${color}`}>
             <Icon className="w-6 h-6" />

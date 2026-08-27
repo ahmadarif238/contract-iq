@@ -1,18 +1,106 @@
 @import "tailwindcss";
 
+/*
+ * Editorial theme.
+ *
+ * A quiet, document-first look: near-white paper, a neutral greyscale for
+ * structure, emerald as the single accent, and Instrument Serif for display
+ * headings so contract text reads like a document rather than a dashboard.
+ *
+ * Colours live in this one @theme block, which Tailwind v4 exposes directly as
+ * utilities (`bg-paper`, `text-accent`, `border-line`), so a palette change is
+ * a single-file edit.
+ */
+
 @theme {
-    --color-primary: #0f172a;
-    --color-primary-light: #334155;
-    --color-secondary: #3b82f6;
-    --color-risk-high: #ef4444;
-    --color-risk-medium: #f59e0b;
-    --color-risk-low: #10b981;
+    --color-paper: #f8f9fa;      /* page background */
+    --color-surface: #ffffff;    /* cards and raised panels */
+    --color-line: #e5e5e5;       /* hairlines and dividers */
+    --color-line-strong: #d4d4d4;
+    --color-ink: #171717;        /* primary text */
+    --color-ink-soft: #525252;   /* secondary text */
+    --color-ink-faint: #a3a3a3;  /* tertiary text, captions */
+
+    --color-accent: #059669;     /* emerald - primary action / emphasis */
+    --color-accent-hover: #047857;
+    --color-accent-soft: #ecfdf5;
+
+    /* Retained from the previous palette so existing markup keeps working;
+       `secondary` now points at the accent rather than the old blue. */
+    --color-primary: #171717;
+    --color-primary-light: #525252;
+    --color-secondary: #059669;
+    --color-risk-high: #e11d48;
+    --color-risk-medium: #d97706;
+    --color-risk-low: #059669;
+
+    --font-sans: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* Base styles using correct v4 syntax or standard CSS */
-body {
-    @apply bg-gray-50 text-gray-900;
-    /* Note: slate-50 might require importing the color or using gray-50 if slate isn't default in v4 without config */
+@layer base {
+    body {
+        @apply bg-paper text-ink antialiased;
+        font-family: var(--font-sans);
+        letter-spacing: -0.011em;
+    }
+
+    h1, h2, h3 {
+        font-family: var(--font-serif);
+        letter-spacing: -0.01em;
+        font-weight: 400;
+    }
+
+    code, pre {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+    }
 }
 
-/* Re-add slate colors if missing, but usually v4 includes full palette but we should be safe with gray/slate if imported */
+@layer utilities {
+    /* Opt-in serif display, for figures and titles that should read editorially
+       even where a heading tag is not semantically correct. */
+    .font-serif-title {
+        font-family: var(--font-serif);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    .font-mono-code {
+        font-family: var(--font-mono);
+    }
+
+    /* Small uppercase label above a section heading. */
+    .eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        @apply text-accent;
+    }
+
+    /* Paper panel: lifted by a hairline and a whisper of shadow, not a border. */
+    .panel {
+        @apply bg-surface border border-line rounded-2xl shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)];
+    }
+}
+
+/* Slim, unobtrusive scrollbars. */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.28);
+}
