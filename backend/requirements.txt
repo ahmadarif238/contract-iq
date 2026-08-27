@@ -5,7 +5,7 @@ pydantic-settings
 langchain
 langgraph
 langchain-community
-langchain-cerebras
+langchain-groq
 langchain-text-splitters
 sqlalchemy
 alembic

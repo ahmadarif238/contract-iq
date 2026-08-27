@@ -39,8 +39,9 @@ class QAService:
         1. Answer directly and concisely.
         2. Provide CITATIONS: exact clause text from the context that supports your answer.
         3. Identify the Clause Type (e.g., "Termination", "Confidentiality").
-        4. If the answer is NOT in the context, explicitly state: "The contract does not contain information regarding [topic]."
-        5. DO NOT hallucinate or use outside knowledge.
+        4. Capture the SOURCE from the context metadata (e.g., "contract_A.pdf").
+        5. If the answer is NOT in the context, explicitly state: "The contract does not contain information regarding [topic]."
+        6. DO NOT hallucinate or use outside knowledge.
         
         Return the response in the following JSON format:
         {{
@@ -49,7 +50,8 @@ class QAService:
                 {{
                     "clause_text": "Exact text from contract...",
                     "clause_type": "Type...",
-                    "explanation": "Why this supports the answer..."
+                    "explanation": "Why this supports the answer...",
+                    "source": "Filename found in the Source field of the context"
                 }}
             ],
             "confidence": "High|Medium|Low"

@@ -17,3 +17,7 @@ backend/data/
 
 # Logs
 *.log
+
+# Local fallback datastore (created at runtime)
+backend/sql_app.db
+*.db

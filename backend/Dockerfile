@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HF_HOME=/app/data
 
 # Install system dependencies (needed for some python packages)
 RUN apt-get update && apt-get install -y --no-install-recommends \
